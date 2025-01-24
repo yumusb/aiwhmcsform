@@ -13,8 +13,7 @@
 
 const DEBUG_MODE = false;
 const MATCH_THRESHOLD = 0.6;
-const EMAIL = 'some@gmail.com'; // 填写 邮箱(some@gmail.com)或者域名(xxxmail.com) ，如果是域名 则需要catch-all，会生成前缀后拼接到后面 xxx@domain.com，如果是邮箱，则原模原样的填充。
-
+const EMAIL = 'some@gmail.com'; // 填写 邮箱(some@gmail.com)或者域名(xxxmail.com) ，如果是域名 则需要catch-all，会生成前缀后拼接到后面 xxx@xxxmail.com，如果是邮箱，则原模原样的填充。
 // 能理解的 可以自己修改使用其他AI
 const AI_API_KEY = 'xxxx'; // https://platform.deepseek.com/api_keys
 const AI_ENDPOINT = `https://api.deepseek.com/v1/chat/completions`;

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         whmcs表单填充专家
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.01
 // @description  高级表单自动填充解决方案
 // @author       yumusb
 // @match        *://*/*
@@ -11,11 +11,12 @@
 // @connect      api.deepseek.com
 // ==/UserScript==
 
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 const MATCH_THRESHOLD = 0.6;
-const EMAIL_DOMAIN = 'email.com'; // your domain
+const EMAIL = 'some@gmail.com'; // 填写 邮箱(some@gmail.com)或者域名(xxxmail.com) ，如果是域名 则需要catch-all，会生成前缀后拼接到后面 xxx@domain.com，如果是邮箱，则原模原样的填充。
+
 // 能理解的 可以自己修改使用其他AI
-const AI_API_KEY = 'xxx'; // https://platform.deepseek.com/api_keys
+const AI_API_KEY = 'xxxx'; // https://platform.deepseek.com/api_keys
 const AI_ENDPOINT = `https://api.deepseek.com/v1/chat/completions`;
 const AI_MODEL = `deepseek-chat`;
 
@@ -440,7 +441,14 @@ ${fieldList}
                 const matchResult = findBestMatch(fieldKey);
                 report.push(matchResult);
                 if (matchResult.score >= MATCH_THRESHOLD) {
-                    value = value.replace(/zhanweifu\.com/g, EMAIL_DOMAIN);
+                    if(value.indexOf("zhanweifu.com")!=-1){
+                        if (EMAIL.indexOf("@")!=-1){
+                            value = EMAIL;
+                        }else{
+                            value = value.replace(/zhanweifu\.com/g, EMAIL);
+                        }
+                    }
+                    value = value.replace(/zhanweifu\.com/g, EMAIL);
                     fillField(matchResult.element, value);
                     successCount++;
                     debugLog('INFO', `✅ 成功填充字段: ${fieldKey} → ${matchResult.identifier}`);

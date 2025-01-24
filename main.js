@@ -11,7 +11,7 @@
 // @connect      api.deepseek.com
 // ==/UserScript==
 
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 const MATCH_THRESHOLD = 0.6;
 const EMAIL = 'some@gmail.com'; // 填写 邮箱(some@gmail.com)或者域名(xxxmail.com) ，如果是域名 则需要catch-all，会生成前缀后拼接到后面 xxx@domain.com，如果是邮箱，则原模原样的填充。
 
